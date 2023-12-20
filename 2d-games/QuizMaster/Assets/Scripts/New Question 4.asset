@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: New Question 4
   m_EditorClassIdentifier: 
   question: What is my weight?
+  answers:
+  - 80
+  - 85
+  - 90
+  - 95
+  correctAnswerIndex: 2
