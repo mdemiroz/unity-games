@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: New Question 2
   m_EditorClassIdentifier: 
   question: What is my gender?
+  answers:
+  - Male
+  - Female
+  - Both
+  - Unknown
+  correctAnswerIndex: 0

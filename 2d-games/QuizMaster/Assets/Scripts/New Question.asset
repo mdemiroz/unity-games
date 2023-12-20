@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: New Question
   m_EditorClassIdentifier: 
   question: What is my name?
+  answers:
+  - Ali
+  - Veli
+  - Deli
+  - Murat
+  correctAnswerIndex: 3

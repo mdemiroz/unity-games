@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: New Question 3
   m_EditorClassIdentifier: 
   question: What is my height?
+  answers:
+  - 1.72
+  - 1.75
+  - 1.78
+  - 1.80
+  correctAnswerIndex: 1
