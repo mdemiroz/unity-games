@@ -7,18 +7,42 @@ using UnityEngine.UI;
 
 public class Quiz : MonoBehaviour {
 
+    [Header("Questions")]
     [SerializeField] TextMeshProUGUI questionText;
     [SerializeField] QuestionSO question;
+
+    [Header("Answers")]
     [SerializeField] GameObject[] answerButtons;
     int correctAnswerIndex;
+    bool hasAnsweredEarly;
+
+    [Header("Button Colors")]
     [SerializeField] Sprite defaultAnswerSprite;
     [SerializeField] Sprite correctAnswerSprite;
+    
+    [Header("Timer")]
+    [SerializeField] Image timerImage;
+    Timer timer;
 
     void Start() {
-        DisplayQuiz();
+        timer = FindObjectOfType<Timer>();
+        GetNextQuestion();
+        // DisplayQuestion();
     }
 
-    void DisplayQuiz() {
+    void Update() {
+        timerImage.fillAmount = timer.fillFraction;
+        if(timer.loadNextQuestion) {
+            hasAnsweredEarly = false;
+            GetNextQuestion();
+            timer.loadNextQuestion = false;
+        } else if(!hasAnsweredEarly && !timer.isAnsweringQuestion) {
+            DisplayAnswer(-1);
+            SetButtonState(false);
+        }
+    }
+
+    void DisplayQuestion() {
         questionText.text = question.GetQuestion();
 
         for(int i = 0; i<answerButtons.Length; i++) {
@@ -28,6 +52,13 @@ public class Quiz : MonoBehaviour {
     }
 
     public void OnAnswerSelected(int index) {
+        hasAnsweredEarly = true;
+        DisplayAnswer(index);
+        SetButtonState(false);
+        timer.CancelTimer();
+    }
+
+    void DisplayAnswer(int index) {
         correctAnswerIndex = question.GetCorrectAnswerIndex();
 
         //if the answer is correct
@@ -40,14 +71,12 @@ public class Quiz : MonoBehaviour {
 
         Image buttonImage = answerButtons[correctAnswerIndex].GetComponent<Image>();
         buttonImage.sprite = correctAnswerSprite;
-
-        SetButtonState(false);
     }
 
-    void GetNextQuiz() {
+    void GetNextQuestion() {
         SetButtonState(true);
         SetDefaultButtonSprite();
-        DisplayQuiz();
+        DisplayQuestion();
     }
 
     void SetButtonState(bool state) {

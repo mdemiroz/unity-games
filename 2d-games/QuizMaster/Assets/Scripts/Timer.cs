@@ -8,21 +8,21 @@ public class Timer : MonoBehaviour {
     [SerializeField] float timeToCompleteQuestion;
     [SerializeField] float timeToShowCorrectAnswer;
 
-    public bool isAnsweringQuestion = false;
     public bool loadNextQuestion;
     public float fillFraction;
 
+    public bool isAnsweringQuestion = false;
     float timerValue;
 
     void Update() {
-        UpdateTime();
+        UpdateTimer();
     }
 
     public void CancelTimer() {
         timerValue = 0;
     }
 
-    void UpdateTime() {
+    void UpdateTimer() {
         timerValue -= Time.deltaTime;
 
         if(isAnsweringQuestion) {
