@@ -24,11 +24,14 @@ public class Quiz : MonoBehaviour {
     [Header("Timer")]
     [SerializeField] Image timerImage;
     Timer timer;
+    
+    [Header("Progress")]
+    [SerializeField] TextMeshProUGUI scoreText;
+    ScoreKeeper scoreKeeper;
 
     void Start() {
         timer = FindObjectOfType<Timer>();
-        // GetNextQuestion();
-        // DisplayQuestion();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
 
     void Update() {
@@ -57,6 +60,7 @@ public class Quiz : MonoBehaviour {
         DisplayAnswer(index);
         SetButtonState(false);
         timer.CancelTimer();
+        scoreText.text = "Progress: " + scoreKeeper.CalculateScore() + "%";
     }
 
     void DisplayAnswer(int index) {
@@ -65,6 +69,7 @@ public class Quiz : MonoBehaviour {
         //if the answer is correct
         if(index == correctAnswerIndex) {
             questionText.text = "Correct";
+            scoreKeeper.IncrementCorrectAnswers();
         } else {
             string correctAnswer = currentQuestion.GetAnswer(correctAnswerIndex);
             questionText.text = "Sorry, the correct answer was: " + correctAnswer;
@@ -83,6 +88,7 @@ public class Quiz : MonoBehaviour {
         SetDefaultButtonSprite();
         GetRandomQuestion();
         DisplayQuestion();
+        scoreKeeper.IncrementQuestionsSeen();
     }
 
     void GetRandomQuestion() {
