@@ -1848,8 +1848,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToCompleteQuestion: 2
-  timeToShowAnswer: 5
+  timeToShowCorrectAnswer: 5
   isAnsweringQuestion: 0
+  fillFraction: 0
 --- !u!1 &1600522809
 GameObject:
   m_ObjectHideFlags: 0
