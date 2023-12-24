@@ -1847,11 +1847,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01846b88fa638a148a99b7a13d128e27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToCompleteQuestion: 2
+  timeToCompleteQuestion: 10
   timeToShowCorrectAnswer: 5
-  isAnsweringQuestion: 0
   loadNextQuestion: 0
   fillFraction: 0
+  isAnsweringQuestion: 0
 --- !u!1 &1600522809
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,7 +2207,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionText: {fileID: 137496784}
-  question: {fileID: 11400000, guid: 5a4c0185c67772f4789caa859cf30d87, type: 2}
+  questions:
+  - {fileID: 11400000, guid: 5a4c0185c67772f4789caa859cf30d87, type: 2}
+  - {fileID: 11400000, guid: 8a6e1a591f92f5a43a4e543693ed47c1, type: 2}
+  - {fileID: 11400000, guid: 410285b5fd828ff47838ecc8090a64b5, type: 2}
+  - {fileID: 11400000, guid: f0b410e5493447247b9d3348adf0f61e, type: 2}
+  - {fileID: 11400000, guid: 6292ea287fd5e454c8502aeb641e0881, type: 2}
   answerButtons:
   - {fileID: 683787792}
   - {fileID: 249701695}
