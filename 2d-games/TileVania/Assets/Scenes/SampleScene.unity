@@ -14797,6 +14797,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4315232842245873738, guid: d2b4a2e7fb910894f8effd49eaf5559d, type: 3}
+      propertyPath: jumpSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315232842245873738, guid: d2b4a2e7fb910894f8effd49eaf5559d, type: 3}
+      propertyPath: speedCoefficient
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4495166216380019514, guid: d2b4a2e7fb910894f8effd49eaf5559d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -14815,6 +14823,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4499711490421184145, guid: d2b4a2e7fb910894f8effd49eaf5559d, type: 3}
       propertyPath: m_GravityScale
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499711490421184145, guid: d2b4a2e7fb910894f8effd49eaf5559d, type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
