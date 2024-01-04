@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,11 +17,18 @@ public class PlayerMovement : MonoBehaviour {
 
     void Update() {
         Run();
+        FlipSprite();
     }
 
     void Run() {
         Vector2 playerVelocity = new Vector2(moveInput.x * speedCoefficient, playerRigidBody.velocity.y);
         playerRigidBody.velocity = playerVelocity;
+    }
+
+    void FlipSprite() {
+        bool isPlayerMovingHorizontally = Mathf.Abs(playerRigidBody.velocity.x) > Mathf.Epsilon;
+        if(isPlayerMovingHorizontally)
+            transform.localScale = new Vector2(Mathf.Sign(playerRigidBody.velocity.x), transform.localScale.y);
     }
 
     void OnMove(InputValue inputValue) {
