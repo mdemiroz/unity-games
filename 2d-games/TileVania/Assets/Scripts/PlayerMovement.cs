@@ -7,8 +7,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour {
 
-    [SerializeField] float speedCoefficient = 3f;
+    [SerializeField] float moveSpeed = 3f;
     [SerializeField] float jumpSpeed = 4f;
+    [SerializeField] float climbSpeed = 3f;
     Vector2 moveInput;
     Rigidbody2D playerRigidBody;
     Animator playerAnimator;
@@ -23,10 +24,11 @@ public class PlayerMovement : MonoBehaviour {
     void Update() {
         Run();
         FlipSprite();
+        ClimbLatter();
     }
 
     void Run() {
-        Vector2 playerVelocity = new Vector2(moveInput.x * speedCoefficient, playerRigidBody.velocity.y);
+        Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, playerRigidBody.velocity.y);
         playerRigidBody.velocity = playerVelocity;
         bool isPlayerMovingHorizontally = Mathf.Abs(playerRigidBody.velocity.x) > Mathf.Epsilon;
         playerAnimator.SetBool("isRunning", isPlayerMovingHorizontally);
@@ -36,6 +38,14 @@ public class PlayerMovement : MonoBehaviour {
         bool isPlayerMovingHorizontally = Mathf.Abs(playerRigidBody.velocity.x) > Mathf.Epsilon;
         if(isPlayerMovingHorizontally)
             transform.localScale = new Vector2(Mathf.Sign(playerRigidBody.velocity.x), transform.localScale.y);
+    }
+
+    void ClimbLatter() {
+        bool isClimbable = playerCollider.IsTouchingLayers(LayerMask.GetMask("Climbing"));
+        if(!isClimbable)
+            return;
+        Vector2 climbVelocity = new Vector2(playerRigidBody.velocity.x, moveInput.y * climbSpeed);
+        playerRigidBody.velocity = climbVelocity;
     }
 
     void OnMove(InputValue inputValue) {
@@ -52,5 +62,9 @@ public class PlayerMovement : MonoBehaviour {
         if(isJumpable) {
             playerRigidBody.velocity += new Vector2(0f, jumpSpeed);
         }
+    }
+
+    void OnClimb() {
+
     }
 }
