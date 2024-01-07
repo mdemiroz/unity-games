@@ -14,11 +14,15 @@ public class PlayerMovement : MonoBehaviour {
     Rigidbody2D playerRigidBody;
     Animator playerAnimator;
     CapsuleCollider2D playerCollider;
+    float normalGravity;
 
     void Start() {
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider2D>();
+        normalGravity = playerRigidBody.gravityScale;
+        Debug.Log("Initial normalGravity: " + normalGravity);
+
     }
 
     void Update() {
@@ -42,8 +46,17 @@ public class PlayerMovement : MonoBehaviour {
 
     void ClimbLatter() {
         bool isClimbable = playerCollider.IsTouchingLayers(LayerMask.GetMask("Climbing"));
-        if(!isClimbable)
+        if(!isClimbable) {
+            playerRigidBody.gravityScale = normalGravity;
+            Debug.Log("playerRigidBody.gravityScale is set to = " + normalGravity);
             return;
+        }
+
+        // set gravity = 0 when on latter
+        playerRigidBody.gravityScale = 0f;
+        Debug.Log("playerRigidBody.gravityScale is set to = " + playerRigidBody.gravityScale + " and normalGravity = " + normalGravity);
+
+        // set y-axis movement
         Vector2 climbVelocity = new Vector2(playerRigidBody.velocity.x, moveInput.y * climbSpeed);
         playerRigidBody.velocity = climbVelocity;
     }
