@@ -13,13 +13,15 @@ public class PlayerMovement : MonoBehaviour {
     Vector2 moveInput;
     Rigidbody2D playerRigidBody;
     Animator playerAnimator;
-    CapsuleCollider2D playerCollider;
+    CapsuleCollider2D playerBodyCollider;
+    BoxCollider2D playerFeetCollider;
     float normalGravity;
 
     void Start() {
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
-        playerCollider = GetComponent<CapsuleCollider2D>();
+        playerBodyCollider = GetComponent<CapsuleCollider2D>();
+        playerFeetCollider = GetComponent<BoxCollider2D>();
         normalGravity = playerRigidBody.gravityScale;
         Debug.Log("Initial normalGravity: " + normalGravity);
 
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void ClimbLatter() {
-        bool isClimbable = playerCollider.IsTouchingLayers(LayerMask.GetMask("Climbing"));
+        bool isClimbable = playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Climbing"));
         if(!isClimbable) {
             playerAnimator.SetBool("isClimbing", false);
             playerRigidBody.gravityScale = normalGravity;
@@ -78,16 +80,12 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnJump(InputValue inputValue) {
         Debug.Log("Jumping: " + inputValue.Get<float>());
-        bool isJumpable = inputValue.isPressed && playerCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        bool isJumpable = inputValue.isPressed && playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
         Debug.Log("inputValue.isPressed: " + inputValue.isPressed);
-        Debug.Log("playerCollider.IsTouchingLayers(LayerMask.GetMask(\"Ground\"): " + playerCollider.IsTouchingLayers(LayerMask.GetMask("Ground")));
+        Debug.Log("playerCollider.IsTouchingLayers(LayerMask.GetMask(\"Ground\"): " + playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")));
         Debug.Log("isJumpable: " + isJumpable);
         if(isJumpable) {
             playerRigidBody.velocity += new Vector2(0f, jumpSpeed);
         }
-    }
-
-    void OnClimb() {
-
     }
 }
