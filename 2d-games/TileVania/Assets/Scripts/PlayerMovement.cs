@@ -17,9 +17,11 @@ public class PlayerMovement : MonoBehaviour {
     BoxCollider2D playerFeetCollider;
     float normalGravity;
     bool isAlive;
+    [SerializeField] Vector2 deathKick;
 
     void Start() {
         isAlive = true;
+        deathKick = new Vector2(10f, 10f);
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         playerBodyCollider = GetComponent<CapsuleCollider2D>();
@@ -42,6 +44,7 @@ public class PlayerMovement : MonoBehaviour {
         if(hasTouchedEnemy) {
             isAlive = false;
             playerAnimator.SetTrigger("dying");
+            playerRigidBody.velocity = deathKick;
         }
     }
 
