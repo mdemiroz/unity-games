@@ -16,21 +16,31 @@ public class PlayerMovement : MonoBehaviour {
     CapsuleCollider2D playerBodyCollider;
     BoxCollider2D playerFeetCollider;
     float normalGravity;
+    bool isAlive;
 
     void Start() {
+        isAlive = true;
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         playerBodyCollider = GetComponent<CapsuleCollider2D>();
         playerFeetCollider = GetComponent<BoxCollider2D>();
         normalGravity = playerRigidBody.gravityScale;
         Debug.Log("Initial normalGravity: " + normalGravity);
-
     }
 
     void Update() {
-        Run();
-        FlipSprite();
-        ClimbLatter();
+        if(isAlive) {
+            Run();
+            FlipSprite();
+            ClimbLatter();
+        }
+        Die();
+    }
+
+    void Die() {
+        bool hasTouchedEnemy = playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemies"));
+        if(hasTouchedEnemy)
+            isAlive = false;
     }
 
     void Run() {
