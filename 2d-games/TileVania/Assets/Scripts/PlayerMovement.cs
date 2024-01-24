@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour {
     float normalGravity;
     bool isAlive;
     [SerializeField] Vector2 deathKick;
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform gun;
 
     void Start() {
         isAlive = true;
@@ -86,6 +88,12 @@ public class PlayerMovement : MonoBehaviour {
         Debug.Log("Mathf.Abs(playerRigidBody.velocity.y): " + Mathf.Abs(playerRigidBody.velocity.y));
         // set climbing animation
         playerAnimator.SetBool("isClimbing", isPlayerClimbing);
+    }
+
+    void OnFire(InputValue inputValue) {
+        if(!isAlive) return;
+        // 1st param what we are spawning, 2nd param where we are spawning
+        Instantiate(bullet, gun.position, transform.rotation);
     }
 
     void OnMove(InputValue inputValue) {
