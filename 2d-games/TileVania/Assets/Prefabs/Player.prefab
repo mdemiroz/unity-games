@@ -265,6 +265,8 @@ MonoBehaviour:
   jumpSpeed: 25
   climbSpeed: 3
   deathKick: {x: 0, y: 0}
+  bullet: {fileID: 1031882500726006264, guid: f32d11efb8660b043b3fd22a9f44fb6e, type: 3}
+  gun: {fileID: 2714339210355781518}
 --- !u!1 &8276621340009271523
 GameObject:
   m_ObjectHideFlags: 0
