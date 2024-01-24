@@ -16,6 +16,7 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("OnTriggerEnter2D is called by: " + other.name);
         enemyMoveSpeed = -enemyMoveSpeed;
         FlipEnemy();
     }

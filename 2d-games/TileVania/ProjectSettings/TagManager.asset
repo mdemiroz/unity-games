@@ -17,8 +17,8 @@ TagManager:
   - Player
   - Environment
   - Enemies
-  - 
-  - 
+  - Bullets
+  - Hazards
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
     locked: 0
   - name: Environment
     uniqueID: 861489033
+    locked: 0
+  - name: Hazards
+    uniqueID: 2164630529
     locked: 0
   - name: Enemies
     uniqueID: 962353327

@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Die() {
-        bool hasTouchedEnemy = playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemies"));
+        bool hasTouchedEnemy = playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemies", "Hazards"));
         if(hasTouchedEnemy) {
             isAlive = false;
             playerAnimator.SetTrigger("dying");
@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour {
         if(!isClimbable) {
             playerAnimator.SetBool("isClimbing", false);
             playerRigidBody.gravityScale = normalGravity;
-            Debug.Log("playerRigidBody.gravityScale is set to = " + normalGravity);
+            // Debug.Log("playerRigidBody.gravityScale is set to = " + normalGravity);
             return;
         }
 
